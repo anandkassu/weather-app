@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'weather.css' %}">
     
 </head>
 
@@ -17,6 +19,13 @@
                 <h1 class="title">
                     Weather condition....
                 </h1>
+                <h2 id="day"></h2>
+                <div class="dateDiv"> 
+                    <div class="date"><h2 id="date"></h2></div>
+                    <div class="month"><h2 id="month"></h2></div>
+                    <div class="year"><h2 id="year"></h2></div>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -83,3 +92,22 @@
 
 </html>
 
+<script>
+    var d = new Date();
+  var weekday = new Array(7);
+  weekday[0] = "Sunday";
+  weekday[1] = "Monday";
+  weekday[2] = "Tuesday";
+  weekday[3] = "Wednesday";
+  weekday[4] = "Thursday";
+  weekday[5] = "Friday";
+  weekday[6] = "Saturday";
+
+  var n = weekday[d.getDay()];
+  document.getElementById("day").innerHTML = n;
+
+  document.getElementById("date").innerHTML=d.getDate() +" / ";
+  document.getElementById("month").innerHTML=d.getMonth()+1 +" / ";
+  document.getElementById("year").innerHTML=d.getFullYear()
+
+</script>
