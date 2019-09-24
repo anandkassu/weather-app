@@ -46,6 +46,12 @@ def index(request):
 
         city_weather = {
             'city' : city.name,
+            'country' : r['sys']['country'],
+            'temperature' : r['main']['temp'],
+            'max_temp' : r['main']['temp_max'],
+            'min_temp' : r['main']['temp_min'],
+            'pressure' : r['main']['pressure'],
+            'humidity' : r['main']['humidity'],
             'temperature' : r['main']['temp'],
             'description' : r['weather'][0]['description'],
             'icon' : r['weather'][0]['icon'],
@@ -66,3 +72,8 @@ def delete_city(request, city_name):
     City.objects.get(name=city_name).delete()
     
     return redirect('home')
+
+
+
+
+            

@@ -6,41 +6,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Weather</title>
     
     <link rel="stylesheet" type="text/css" href="{% static 'weather.css' %}">
     
 </head>
 
 <body>
-    <section class="hero is-primary" style="background-color:#00D1E9">
-        <div class="hero-body">
-            <div class="container" style="margin-left: 40px">
-                <h1 class="title">
+        
+            <div>
+                <h1>
                     Weather condition....
                 </h1>
                 <h2 id="day"></h2>
                 <div class="dateDiv"> 
-                    <div class="date"><h2 id="date"></h2></div>
-                    <div class="month"><h2 id="month"></h2></div>
-                    <div class="year"><h2 id="year"></h2></div>
+                    <span id="date"></span>
+                    <span id="month"></span>
+                    <span id="year"></span>
                 </div>
                 
             </div>
-        </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
+    
+        <div>
+            
                     <form method="POST">
                         {% csrf_token %}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
+                        <div>
+                            <div>
                                 {{ form.name }}
                             </div>
-                            <div class="control">
-                                <button type="submit" class="button is-info">
+                            <div>
+                                <button type="submit">
                                     Add City
                                 </button>
                             </div>
@@ -49,35 +45,42 @@
                             <div class="notification {{ message_class }}">{{ message }}</div>
                         {% endif %}
                     </form>
-                </div>
-            </div>
         </div>
-    </section>
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-offset-4 is-4">
+    
+    
+            <div>
+                <div>
                     {% for city_weather in weather_data %}
-                    <div class="box">
-                        <article class="media">
-                            <div class="media-left">
-                                <figure class="image is-50x50">
+                    <div>
+                        <article>
+                            <div>
+                                <figure>
                                     <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
                                 </figure>
                             </div>
-                            <div class="media-content">
-                                <div class="content">
+                            <div>
+                                <div>
                                     <p>
-                                        <span class="title">{{ city_weather.city }}</span>
+                                        <span>{{ city_weather.city }}</span>,
+                                        <span>{{ city_weather.country }}</span>
                                         <br>
-                                        <span class="subtitle">{{ city_weather.temperature }}° F</span>
+                                        <span>temp : {{ city_weather.temperature }}° F</span>
+                                        <br>
+                                        <span>min_temp : {{ city_weather.min_temp }}° F</span>
+                                        <br>
+                                        <span>max_temp : {{ city_weather.max_temp }}° F</span>
+                                        <br>
+                                        <span>pressure : {{ city_weather.pressure }} hpa</span>
+                                        <br>
+                                        <span>humidity : {{ city_weather.humidity }} %</span>
+                                        <br>
                                         <br> {{ city_weather.description }}
                                     </p>
                                 </div>
                             </div>
-                            <div class="media-right">
+                            <div >
                                 <a href="{% url 'delete_city' city_weather.city %}">
-                                    <button class="delete"></button>
+                                    <button class="delete">x</button>
                                 </a>
                             </div>
                         </article>
@@ -85,8 +88,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
-    </section>
+ 
     
 </body>
 
